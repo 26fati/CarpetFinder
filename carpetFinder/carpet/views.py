@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Carpet
 from .forms import NewCarpetForm, EditCarpetForm
 
@@ -11,8 +11,14 @@ def add(request):
             carpet.seller = request.user
             carpet.save()
 
+            return redirect('base:home')
     else:
         form = NewCarpetForm()
+
+    return render(request, 'carpet/add.html', {
+        'form': form,
+        'title': 'New carpet'
+    })
 
 
 def edit(request, id):
@@ -33,8 +39,7 @@ def delete(request, id):
     carpet.delete()
 
 
-def get(request):
-    carpets = Carpet.objects.filter(is_sold=False)[0:6]
+
 
 
 def get_by_id(request, id):
