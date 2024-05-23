@@ -6,4 +6,6 @@ app_name = 'carpet'
 
 urlpatterns = [
     path('add/', views.add, name='add'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('<int:id>/', views.detail, name='detail'),
 ]

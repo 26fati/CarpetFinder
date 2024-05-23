@@ -39,8 +39,16 @@ def delete(request, id):
     carpet.delete()
 
 
+def dashboard(request):
+    carpets = Carpet.objects.filter(seller=request.user)
+    return render(request, 'carpet/dashboard.html', {
+        'carpets': carpets,
+})
 
-
-
-def get_by_id(request, id):
+def detail(request, id):
     carpet = get_object_or_404(Carpet, id=id)
+    related_carpets = Carpet.objects.filter(style=carpet.style, is_sold=False).exclude(id=id)[0:3]
+    return render(request, 'carpet/detail.html', {
+        'carpet': carpet,
+        'related_carpets': related_carpets
+    })

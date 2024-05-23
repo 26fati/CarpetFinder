@@ -1,0 +1,70 @@
+{% extends 'base/home.html' %}
+
+{% block title%} {{ carpet.name }} {% endblock%}
+
+{% block content %}
+    <div class="grid grid-cols-5 gap-6">
+        <div class="col-span-3">
+            <img src="{{ carpet.image.url }}" class="w-full h-auto rounded-xl">
+        </div>
+
+        <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+            <h1 class="mb-6 text-3xl">{{ carpet.name }}</h1>
+            <p class="text-gray-500"><strong>Price: </strong>{{ carpet.price }}</p>
+            <p class="text-gray-500"><strong>Seller: </strong>{{ carpet.seller.username }}</p>
+            <p class="text-gray-500"><strong>Size: </strong>{{ carpet.size}}</p>
+            <p class="text-gray-500"><strong>Style: </strong>{{ carpet.style }}</p>
+            <p class="text-gray-500"><strong>Color: </strong>{{ carpet.color }}</p>
+            <p class="text-gray-500"><strong>Suitability: </strong>{{ carpet.suitability }}</p>
+
+            {% if carpet.material %}
+                <p class="text-gray-700">
+                    <strong class="text-gray-500">Material:</strong><br>
+                    {{ carpet.material }}
+                </p>
+            {% endif %}
+        
+        
+            {% if carpet.description %}
+                <p class="text-gray-700">
+                    <strong class="text-gray-500">Description:</strong><br>
+                    {{ carpet.description }}
+                </p>
+            {% endif %}
+
+            {% if request.user == carpet.seller%}
+                <div class="mt-6 p-6 bg-white rounded-xl">
+                    <p>This is your carpet!</p>
+
+                    <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
+                    <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
+                </div>
+            {% else %}
+                <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
+            {% endif %}
+            </div>
+    </div>
+
+    {% if related_carpets %}
+        <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+            <h2 class="mb-12 text-2xl text-center">Related carpets</h2>
+        
+            <div class="grid grid-cols-3 gap-3">
+                {% for carpet in related_carpets %}
+                    <div>
+                        <a href="{% url 'carpet:detail' carpet.id %}">
+                            <div>
+                                <img src="{{ carpet.image.url }}" class="w-full rounded-t-xl">
+                            </div>
+        
+                            <div class="p-6 bg-white rounded-b-xl">
+                                <h2 class="text-2xl">{{ carpet.name }}</h2>
+                                <p class="text-gray-500">Price: {{ carpet.price }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock%}
