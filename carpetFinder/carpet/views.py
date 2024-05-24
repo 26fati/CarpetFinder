@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Carpet
 from .forms import NewCarpetForm, EditCarpetForm
+from django.contrib import messages
+
 
 def add(request):
     if request.method == 'POST':
@@ -30,13 +32,20 @@ def edit(request, id):
         if form.is_valid():
             form.save()
 
+            return redirect('carpet:detail', id=carpet.id)
     else:
         form = EditCarpetForm(instance=carpet)
+
+    return render(request, 'carpet/add.html', {
+        'form': form,
+        'title': 'Edit carpet'
+    })
 
 
 def delete(request, id):
     carpet = get_object_or_404(Carpet, id=id, seller=request.user)
     carpet.delete()
+    return redirect('base:home')
 
 
 def dashboard(request):

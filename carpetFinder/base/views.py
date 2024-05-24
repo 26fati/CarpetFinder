@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from carpet.models import Carpet
 from .forms import SignupForm
+from django.contrib.auth import logout
 
 def home(request):
     carpets = Carpet.objects.filter(is_sold=False)[0:6]
@@ -19,3 +20,7 @@ def signup(request):
     return render(request, 'base/signup.html', {
         'form': form
     })
+
+def _logout(request):
+    logout(request)
+    return redirect('base:home')
