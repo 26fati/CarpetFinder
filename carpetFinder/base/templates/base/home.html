@@ -10,6 +10,14 @@
     <body>
         <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
             <a href="/" class="text-xl font-semibold">carpetFinder</a>
+
+            <div class="flex-grow flex justify-center"> <!-- Using flex-grow and justify-center to center the search -->
+                <form action="{% url 'base:search' %}" method="GET" class="flex items-center"> 
+                    <input type="text" placeholder="Type to search" name='q' class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"> 
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg ml-2 hover:bg-blue-700">Search</button> 
+                </form>
+
+            </div>
     
             <div class="space-x-4">
                 {% if request.user.is_authenticated %}

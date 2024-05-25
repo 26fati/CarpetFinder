@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from carpet.models import Carpet
 from .forms import SignupForm
 from django.contrib.auth import logout
+from django.db.models import Q
+
 
 def home(request):
     carpets = Carpet.objects.filter(is_sold=False)[0:6]
@@ -24,3 +26,31 @@ def signup(request):
 def _logout(request):
     logout(request)
     return redirect('base:home')
+
+def search(request):
+    query = request.GET.get('q', '')
+    style = request.GET.get('style')
+    color = request.GET.get('color')
+    suitability = request.GET.get('suitability')
+    carpets = Carpet.objects.filter(is_sold=False)
+    if query:
+        carpets = carpets.filter(Q(name__icontains=query) | Q(description__icontains=query) | Q(location__icontains=query))
+
+    if style:
+        carpets = carpets.filter(style=style)
+    if color:
+        carpets = carpets.filter(color=color)
+    if suitability:
+        carpets = carpets.filter(suitability=suitability)
+
+    styles = [style[0] for style in Carpet.STYLE_CHOICES]
+    colors = [color[0] for color in Carpet.COLOR_CHOICES]
+    suitabilities = [suitability[0] for suitability in Carpet.SUITABILITY_CHOICES]
+
+    return render(request, 'base/search.html', {
+        'query': query,
+        'carpets': carpets,
+        'styles': styles,
+        'colors': colors,
+        'suitabilities': suitabilities
+    })

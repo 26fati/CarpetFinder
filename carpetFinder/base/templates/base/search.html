@@ -1,0 +1,63 @@
+{% extends 'base/home.html' %}
+
+{% block title %}carpets{% endblock %}
+
+{% block content %}
+<div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
+    <div class="col-span-1">
+
+        <p class="font-semibold py-2 px-2">styles</p>
+
+        <ul>
+            {% for style in styles %}
+                <li class="py-2 px-2 rounded-xl bg-gray-100 mt-2">
+                    <a href="{% url 'base:search' %}?style={{ style }}">{{ style }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr class="my-6">
+
+        <p class="font-semibold py-2 px-2">colors</p>
+
+        <ul>
+            {% for color in colors %}
+                <li class="py-2 px-2 rounded-xl bg-gray-100 mt-2">
+                    <a href="{% url 'base:search' %}?color={{ color }}">{{ color }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr class="my-6">
+
+        <p class="font-semibold py-2 px-2">suitabilities</p>
+
+        <ul>
+            {% for suitability in suitabilities %}
+                <li class="py-2 px-2 rounded-xl bg-gray-100 mt-2">
+                    <a href="{% url 'base:search' %}?suitability={{ suitability }}">{{ suitability }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-span-3">
+        <div class="grid grid-cols-3 gap-3">
+            {% for carpet in carpets %}
+                <div>
+                    <a href="{% url 'carpet:detail' carpet.id %}">
+                        <div>
+                            <img src="{{ carpet.image.url }}" class="rounded-t-xl">
+                        </div>
+
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{ carpet.name }}</h2>
+                            <p class="text-gray-500">Price: {{ carpet.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
