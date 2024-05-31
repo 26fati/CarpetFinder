@@ -34,9 +34,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'base/static'),
-]
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'carpet',
     'base',
+    'conversation',
 ]
 
 MIDDLEWARE = [
