@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .hero-bg {
-            background-image: url('{% static "images/CARPET-BANNER-IMAGE.jpg" %}'); 
+            background-image: url('{% static "images/CARPET-BANNER-IMAGE.jpg" %}'); /* Replace with your hero image URL */
             background-size: cover;
             background-position: center;
         }
@@ -22,7 +22,6 @@
         <a href="/" class="text-xl font-semibold">
             <span style="color: rgb(181, 101, 29);">Carpet</span><span style="color: rgb(74, 74, 74);">Finder</span>
         </a>
-        
         <div class="flex-grow flex justify-center"> 
             {% if request.user.is_authenticated %}
             <form action="{% url 'base:search' %}" method="GET" class="flex items-center">
@@ -46,11 +45,34 @@
         </div>
     </nav>
 
-    <div class="px-6 py-6">
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center text-white">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold mb-4">Discover the Perfect Carpet for Your Home</h1>
+            <p class="text-xl mb-6">Explore a wide range of styles and colors to find your perfect match.</p>
+            <a href="{% url 'base:signup' %}" class="px-6 py-3 bg-teal-500 text-white rounded-xl hover:bg-teal-700">Shop Now</a>
+        </div>
+    </section>
+
+    
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-100">
         {% block content %}
         {% endblock %}
-    </div>
+    </section>
 
+
+    <section id="about" class="py-16 bg-white text-center">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-4">About CarpetFinder</h2>
+            <p class="text-lg mb-6">At CarpetFinder, we offer the finest selection of carpets from around the world. Whether you're looking for modern designs or traditional patterns, we have something for every taste and budget.</p>
+            <a href="#contact" class="px-6 py-3 bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact Us</a>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
     <footer class="py-5 px-5 bg-gray-800 text-white text-center">
         <div class="flex justify-between">
             <div class="w-2/3 pr-10">

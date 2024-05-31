@@ -3,7 +3,7 @@ from carpet.models import Carpet
 from .forms import SignupForm
 from django.contrib.auth import logout
 from django.db.models import Q
-
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     carpets = Carpet.objects.filter(is_sold=False)[0:6]
@@ -27,6 +27,7 @@ def _logout(request):
     logout(request)
     return redirect('base:home')
 
+@login_required
 def search(request):
     query = request.GET.get('q', '')
     style = request.GET.get('style')
