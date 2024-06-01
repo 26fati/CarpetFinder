@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from carpet.models import Carpet
 from .forms import SignupForm
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from .forms import LoginForm
+
+
 
 def home(request):
     carpets = Carpet.objects.filter(is_sold=False)[0:6]
@@ -54,4 +57,25 @@ def search(request):
         'styles': styles,
         'colors': colors,
         'suitabilities': suitabilities
+    })
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('base:index')
+    else:
+        form = LoginForm()
+    return render(request, 'base/login.html', {'form': form})
+
+
+def profile(request):
+    user_profile = request.user
+    return render(request, 'base/profile.html', {
+        'user_profile': user_profile
     })

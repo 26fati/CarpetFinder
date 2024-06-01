@@ -1,6 +1,4 @@
 env/
-db.sqlite3
+./CarpetFinder/db.sqlite3
+./CarpetFinder/carpetFinder/__pycache__
 .env
-.venv
-__pycache__/
-*.pyc
