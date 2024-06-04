@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'carpetFinder.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'carpetFinder.urls'
@@ -129,6 +130,8 @@ USE_TZ = True
 SESSION_EXPIRE_SECONDS = 1800
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)

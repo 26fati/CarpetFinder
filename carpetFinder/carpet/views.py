@@ -14,7 +14,7 @@ def add(request):
             carpet.seller = request.user
             carpet.save()
 
-            return redirect('base:home')
+            return redirect('carpet:detail', id=carpet.id)
     else:
         form = NewCarpetForm()
 

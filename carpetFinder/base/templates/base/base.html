@@ -36,9 +36,6 @@
                 <a href="{% url 'carpet:dashboard' %}" class="text-lg font-semibold hover:text-gray-500">Dashboard</a>
                 <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold hover:text-gray-500">Inbox</a>
                 <a href="{% url 'base:profile' %}" class="text-lg font-semibold hover:text-gray-500">Profile</a>
-                <a href="{% url 'base:logout' %}" class="px-4 py-2 text-lg font-semibold bg-red-500 text-white rounded-full hover:bg-gray-700">
-                    <i class="fa fa-power-off mr-1"></i> Log out
-                </a>
             {% else %}
                 <a href="{% url 'base:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
                 <a href="{% url 'base:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
