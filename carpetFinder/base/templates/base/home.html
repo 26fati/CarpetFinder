@@ -41,7 +41,7 @@
                     
             {% else %}
                 <a href="{% url 'base:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
-                <a href="{% url 'base:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+                <a href="{% url 'base:login' %}?next={{ request.path }}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
             {% endif %}
         </div>
     </nav>

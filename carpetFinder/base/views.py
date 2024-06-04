@@ -59,19 +59,6 @@ def search(request):
         'suitabilities': suitabilities
     })
 
-def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-                user = form.get_user()
-                login(request, user)
-                if 'next' in request.POST:
-                    return redirect(request.POST.get('next'))
-                else:
-                    return redirect('base:index')
-    else:
-        form = LoginForm()
-    return render(request, 'base/login.html', {'form': form})
 
 
 def profile(request):
